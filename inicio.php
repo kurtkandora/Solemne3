@@ -1,5 +1,5 @@
  <?php {
-	    require_once './libsigma/Sigma.php';
+	    require_once 'vista/libsigma/Sigma.php';
 	   
 	
 	 	$plantilla = new HTML_Template_Sigma('vista/plantilla/');

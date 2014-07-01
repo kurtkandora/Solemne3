@@ -5,7 +5,7 @@
 body {
 	font-family: 'Arvo', serif;
 	font-size: 14px;
-	background: url(../images/siteBackground.jpg) repeat;
+	background: url(../imagenes/siteBackground.jpg) repeat;
 	color: #4b4b4b;
 }
 a {
@@ -89,7 +89,7 @@ header ul li {
 }
 button {
 	text-transform: uppercase;
-	background: url(../images/buttonBackground.jpg) repeat-x;
+	background: url(../imagenes/buttonBackground.jpg) repeat-x;
 	color: #fff;
 	border: 0;
 	padding: 10px 20px;
@@ -153,7 +153,7 @@ footer p {
 	padding: 20px 0;
 	margin: 0;
 	list-style-type: none;
-	background: url(../images/menuBackground.jpg) repeat-x;
+	background: url(../imagenes/menuBackground.jpg) repeat-x;
 	color: #FFF;
 	width: 960px;
 	text-align: left;
@@ -172,11 +172,11 @@ footer p {
 	font-size: 18px;
 }
 .menu li a:hover {
-	background: url(../images/activeMenu.jpg) repeat-x;
+	background: url(../imagenes/activeMenu.jpg) repeat-x;
 	color: #fff;
 }
 .menu #actual a {
-	background: url(../images/activeMenu.jpg) repeat-x;
+	background: url(../imagenes/activeMenu.jpg) repeat-x;
 	color: #fff;
 }
 
