@@ -1,9 +1,5 @@
 <?php
-class Tipo_de_vehiculo {
-    public $id_tipo_vehiculo, $nombre_tipo_vehiculo,$descripcion_tipo_Vehiculo;
-}
-
-require_once '/dbconnect/mysqldb.php';
+require_once './dbconnect/mysqldb.php';
 class Tipo_de_vehiculo {
 
     function insertarVehiculo($vehiculo) {
@@ -31,7 +27,7 @@ class Tipo_de_vehiculo {
         function validar($nombre) {
         $conexion = new MySqlCon();
         try {
-            $sqlQuery = 'SELECT COUNT(*)FROM `editorial` WHERE UPPER(TRIM(`nombre_editorial`)) = UPPER(TRIM(?))';
+            $sqlQuery = 'SELECT COUNT(*)FROM `tipo_de_vehiculo` WHERE UPPER(TRIM(`nombre_tipo_vehiculo`)) = UPPER(TRIM(?))';
             $sentencia = $conexion -> prepare($sqlQuery);
             $sentencia -> bind_param("s", $nombre);
             if ($sentencia -> execute()) {
