@@ -1,0 +1,269 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: 'Arvo', serif;
+	font-size: 14px;
+	background: url(../images/siteBackground.jpg) repeat;
+	color: #4b4b4b;
+}
+a {
+	color: #d03401;
+	text-decoration: none;
+}
+p {
+	line-height: 140%;
+}
+h2 {
+	font-size: 30px;
+	color: #d03401;
+	padding: 0 0 10px 0;
+}
+h3 {
+	font-size: 18px;
+	color: #d03401;
+	padding: 0 0 10px 0;
+}
+h4 {
+	color: #ffffff;
+	font-size: 18px;
+}
+.agrupar {
+	width: 960px;
+	margin: 0 auto;
+}
+.logoagrupar {
+	float: left;
+}
+header h1 {
+	padding: 25px 0 0 0;
+	font-family: 'Abel', sans-serif;
+}
+header h1 a {
+	font-size: 42px;
+	color: #ffffff;
+	text-decoration: none;
+}
+header h1 a span {
+	font-size: 42px;
+	color: #d03401;
+	text-decoration: none;
+}
+header ul {
+	float: right;
+	padding: 50px 0 0 0;
+}
+header ul li {
+	list-style: none;
+	display: inline;
+	padding: 0 20px;
+}
+.articulosuperior {
+	padding: 30px 0;
+}
+.articulomedio {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.1);
+	border: 1px solid #101010;
+	padding: 30px;
+	line-height: 140%;
+}
+.articulomedio .picImg {
+	float: right;
+	margin: 0 0 20px 30px;
+}
+
+.imgimportada {
+	align: right;
+	width: 312px;
+	height: 160px;
+	border: 2px;
+	border-color: white;
+}
+.articulomedio .picagrupar {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);
+	padding: 10px;
+}
+.articulomedio img {
+	border: 1px solid #101010;
+}
+button {
+	text-transform: uppercase;
+	background: url(../images/buttonBackground.jpg) repeat-x;
+	color: #fff;
+	border: 0;
+	padding: 10px 20px;
+	margin-top: 20px;
+	cursor: pointer;
+	font-family: 'Arvo', serif;
+}
+.sidebar {
+	float: right;
+	width: 370px;
+	padding: 20px 0 20px 0;
+}
+.articulocentral {
+	margin: 0 415px 0 0;
+	padding: 20px 0 20px 0;
+}
+.sidebar p {
+	width: 370px;
+	padding-bottom: 30px;
+}
+.sidebar ul {
+	margin-left: 0;
+	padding-left: 0;
+	list-style-type: none;
+}
+.sidebarlist a {
+	display: block;
+	width: 360px;
+	color: #4b4b4b;
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.1);
+	border: 1px solid #101010;
+	list-style: none outside none;
+	padding: 10px 0 10px 10px;
+	margin: 0 0 1px 0;
+}
+.sidebarlist a:link, .sidebarlist a:visited {
+	color: #4b4b4b;
+	text-decoration: none;
+}
+.sidebarlist a:hover {
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0.4);
+	border: 1px solid #101010;
+	color: #6a6a6a;
+	padding: 10px 0 10px 10px;
+}
+footer {
+	border-top: 1px solid #171717;
+	background: #000000;
+}
+footer p {
+	text-align: center;
+	padding: 20px;
+}
+.clearfloat {
+	clear: both;
+	height: 0;
+	font-size: 1px;
+	line-height: 0px;
+}
+.menu ul {
+	padding: 20px 0;
+	margin: 0;
+	list-style-type: none;
+	background: url(../images/menuBackground.jpg) repeat-x;
+	color: #FFF;
+	width: 960px;
+	text-align: left;
+	box-shadow: 0px 6px 7px 0px #0e0e0e;
+}
+.menu li {
+	display: inline;
+}
+.menu li a {
+	text-decoration: none;
+	color: #4b4b4b;
+	padding: 20px 30px;
+	text-shadow: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 18px;
+}
+.menu li a:hover {
+	background: url(../images/activeMenu.jpg) repeat-x;
+	color: #fff;
+}
+.menu #actual a {
+	background: url(../images/activeMenu.jpg) repeat-x;
+	color: #fff;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	width: auto;
+}
+
+/*Pagina de inscripcion*/
+.formulario h2 {
+	background: none repeat scroll 0 0 #A9A9A9;
+	color: #FF3300;
+	display: block;
+	font-family: calibri;
+	font-size: 20px;
+	padding: 5px;
+	text-shadow: 1px 1px 1px #CCCCCC;
+	width: 490px;
+}
+.formulario ul {
+	width: 500px;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+.formulario li {
+	padding: 12px;
+	border-bottom: 1px solid #eee;
+}
+.formulario label {
+	color: #555555;
+	display: inline-block;
+	float: left;
+	font-family: calibri;
+	font-size: 13px;
+	font-weight: bold;
+	margin-top: 3px;
+	padding: 3px;
+	width: 90px;
+}
+.formulario input {
+	height: 20px;
+	width: 220px;
+	padding: 5px 8px;
+}
+.formulario texarea {
+	padding: 8px;
+	width: 300px;
+}
+.formulario button {
+	margin-left: 90px;
+}
+.formulario input, .formulario texarea {
+	border: 1px solid #aaa;
+	box-shadow: 0px 0px 3px #ccc, 0 10px 10px #eee inset;
+	border-radius: 2px;
+	color: #003366;
+	padding-right: 30px;
+	-moz-transition: padding .25s;
+	-webkit-transition: padding .25s;
+	-o-transition: padding .25s;
+	transition: padding .25s;
+}
+.formulario input:focus, .formulario texarea:focus {
+	background: #fff;
+	border: 1px solid #555;
+	box-shadow: 0 0 3px #aaa;
+	padding-right: 80px;
+}
+
+#dv {
+	height: 20px;
+	width: 19px;
+	padding: 5px 8px;
+}
+
+/*Formularo de contacto*/
+.cine {
+	float: right;
+	height: 230px;
+	width: 300px;
+	margin: 10px;
+}
+
+#btnImprimir{
+   margin: 64px 179px 64px;
+}
+
+    
