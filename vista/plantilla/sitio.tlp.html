@@ -1,46 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-	<link rel="stylesheet" href="plantilla/estilos/estiloestandar.css" >
-   
-	<title></title>
-  </head>
-  <body>
-     <div id="agrupar">
-     <header id="cabecera">
-	 <hgroup>
-	 <h1>
-	 {titulo_front}
-	 </h1>
-	 </hgroup>
-	 </header>
-	 <nav id="menu">
-	 </nav>
-	 <section id="seccion">
-	  <article>
-	   
-	  </article>
-	   <article>
-	   
-	  </article>
-	 </section>
-	 <aside id="columna">
-	   <article>
-	   </article>
-	 </aside>
-	 <footer id="pie">
-	     Derechos Reservados &copy; DAI 5501 
-	 </footer>
-	 </div>
-  </body>
-</html>
-
 <!DOCTYPE HTML>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="vista/plantilla/imagenes/favicon.ico" type="image/x-icon">
 	<title>{titulo}</title>
 	<link href="css/styles.css" rel="stylesheet" type="text/css" />
 	<script src="js/script.js"></script>
@@ -50,7 +12,7 @@
 	<div class="agrupar">
 	    <header>
 	    	<div class="logoContainer">
-	            <img src="images/banner.jpg"  >
+	            <img src="vista/plantilla/imagenes/banner.jpg"  >
 	        </div>
 	        <br class="clearfloat" />
 	    </header>
@@ -65,7 +27,7 @@
 	    <section>
 	    	<section>
 	        <article class="articulosuperior">
-	            	 {front}       
+	        {titulo_front}  
 	        </article>
 	      <article class="articulomedio">
 	        	{front_table}
@@ -73,20 +35,8 @@
 	        </article>
 	        </section>
 	        <section>
-	        <aside class="sidebar">
-	        	<h3>Visión</h3>
-	            <p>
-					Nuestra visión como compañía es ser una de las 10 mejores líneas aereas del mundo.
-	            </p>
-	        </aside>
 	        <article class="articulocentral">
-	       		<h3>Misión</h3>
-	            <p>
-	            	Nuestra misión como compañia es transportar sueños entregando lo mejor de nosotros para
-					lograr la preferencia de clientes y comunidades, construyendo una empresa sustentable
-					donde nos encante trabajar.
-					
-				</p>
+	       		 {front} 
 	        </article>
 	        </section>
 	        <br class="clearfloat" />

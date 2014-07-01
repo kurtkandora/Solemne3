@@ -1,15 +1,19 @@
  <?php {
-	    require_once '../vista/libsigma/Sigma.php';
+	    require_once './libsigma/Sigma.php';
 	   
 	
 	 	$plantilla = new HTML_Template_Sigma('vista/plantilla/');
 		$plantilla->loadTemplateFile('sitio.tlp.html');
 		
-		$titulo_pagina='Biblioteca Nacional';
-		$titulo_front='Biblioteca Nacional';
-		$subtitulo_font='La vida es una biblioteca, nunca sabes que libro te va a tocar';
+		$titulo='Motor Mosquito';
+		$titulo_front='<h2>Bienvenido</h2>
+            		   <p>
+            		   Queremos atender en forma agil sus requerimientos, ofrecer el mejor servicio en motores.
+					   Esta pagina web le permite mantener de manera eficiente los motores, vehiculos y usuarios.
+					   Para proceder tiene que logearse.
+            		   </p>';
 		
-		$formulario_front = '
+		$front_table = '
 		<form class="formulario" action="./vista/validaciones.php" method="post" onsubmit="return validarFormauth()">
 	     <ul>
 	        <li>
@@ -27,14 +31,16 @@
 	            <button class="submit" type="submit" name="submit">Iniciar</button>
 	        </li>
 	     </ul>
-	     </form>
-		
-		';
-	    $plantilla->setVariable('titulo',$titulo_pagina);
+	     </form>	';
+		 
+		 $front='<p>
+							  Motores mosquitos, la mejor empresa de vehiculos del pais.
+                          </p>';
+		 
+	    $plantilla->setVariable('titulo',$titulo);
 	    $plantilla->setVariable('titulo_front',$titulo_front);
-	    $plantilla->setVariable('sub_titulo_front',$subtitulo_font);
-	    $plantilla->setVariable('front',$formulario_front);
-	    $plantilla->setVariable('columna',$formulario_columna);
+	    $plantilla->setVariable('front_table',$front_table);
+	    $plantilla->setVariable('front',$front);
 	    $plantilla->parse();
 	    $plantilla->show();
     }
