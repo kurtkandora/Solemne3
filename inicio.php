@@ -1,4 +1,6 @@
- <?php {
+ <?php 
+ 
+
 	    require_once 'vista/libsigma/Sigma.php';
 	   
 	
@@ -12,8 +14,25 @@
 					   Esta pagina web le permite mantener de manera eficiente los motores, vehiculos y usuarios.
 					   Para proceder tiene que logearse.
             		   </p>';
-		
-		$front_table = '
+
+        session_start();
+        if (isset($_SESSION['usuario'])) {
+            $front_table = '<span class="picContainer picImg"><img src="vista/plantilla/imagenes/motor.jpg" class="imgimportada" ></span>
+            				<h2>Felicidades</h2>
+							<p>Inicio de sesion correct. Bienvenido Sr(a). '.$_SESSION['usuario'].'</p>';
+			
+			$menu = '<li><a href="inicio.php">Inicio</a></li>
+				     <li class="drop"><a href="#">Mantenedor</a>
+        				<ul class="sub_menu">
+        					<li><a href="tiposvehiculos.php">Tipos vehiculos</a></li>
+							<li><a href="vehiculos.php">Vehiculos</a></li>
+							<li><a href="usuarios.php">Usuarios</a></li>
+					    </ul>
+        			</li>
+					';
+            
+        } else {
+		$front_table = '<span class="picContainer picImg"><img src="vista/plantilla/imagenes/motor.jpg" class="imgimportada" ></span>
 		<form class="formulario" action="./vista/validaciones.php" method="post" onsubmit="return validarFormauth()">
 	     <ul>
 	        <li>
@@ -28,21 +47,32 @@
 	            <span id="errcontrasena_auth" style="color:red"></span>
 	        </li>
 	        <li>
-	            <button class="submit" type="submit" name="submit">Iniciar</button>
+	            <button class="submit" type="submit" name="submit">Entrar</button>
 	        </li>
 	     </ul>
 	     </form>	';
+		$menu = '<li><a href="inicio.php">Inicio</a></li>
+				<li class="drop"><a href="#">Mantenedor</a>
+        				<ul class="sub_menu">
+        					<li><a href="tiposvehiculos.php">Tipos vehiculos</a></li>
+							<li><a href="vehiculos.php">Vehiculos</a></li>
+							<li><a href="usuarios.php">Usuarios</a></li>
+					    </ul>
+        		</li>
+        		<li><a href="logout.php">Cerrar sesion</a></li>'
+				;
+		}
 		 
-		 $front='<p>
-							  Motores mosquitos, la mejor empresa de vehiculos del pais.
-                          </p>';
+		 $front='<center><h3> Motores mosquitos, la mejor empresa de vehiculos del pais. <h3></center>';
+                                
+                          
+         
 		 
 	    $plantilla->setVariable('titulo',$titulo);
 	    $plantilla->setVariable('titulo_front',$titulo_front);
 	    $plantilla->setVariable('front_table',$front_table);
 	    $plantilla->setVariable('front',$front);
+	    $plantilla -> setVariable('barra_navegacion', $menu);
 	    $plantilla->parse();
 	    $plantilla->show();
-    }
-  
 ?>

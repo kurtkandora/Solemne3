@@ -175,4 +175,3 @@ function DesplegarVenta() {
 		document.getElementById("articulomedio").innerHTML = '<h1>NO HA COMPRADO UN VUELO POR FAVOR ADQUIERA UNO ANTES DE CONTINUAR</h1><br /> <a href="precios.html">Volver</a>';
 	}
 }
-
