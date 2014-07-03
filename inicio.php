@@ -21,15 +21,18 @@
             				<h2>Felicidades</h2>
 							<p>Inicio de sesion correct. Bienvenido Sr(a). '.$_SESSION['usuario'].'</p>';
 			
-			$menu = '<li><a href="inicio.php">Inicio</a></li>
-				     <li class="drop"><a href="#">Mantenedor</a>
-        				<ul class="sub_menu">
-        					<li><a href="tiposvehiculos.php">Tipos vehiculos</a></li>
-							<li><a href="vehiculos.php">Vehiculos</a></li>
-							<li><a href="usuarios.php">Usuarios</a></li>
-					    </ul>
-        			</li>
-					';
+			$menu = '<ul id="menu">
+					    <li><a href="inicio.php">Home</a></li>
+					    <li>
+					        <a href="#">Mantenedor</a>
+					        <ul>
+					            <li><a href="usuarios.php">Usuarios</a></li>
+					            <li><a href="tipovehiculos.php">Tipo Vehiculos</a></li>
+					            <li><a href="vehiculos.php">Vehiculos</a></li>
+					        </ul>
+					    </li>
+					    <li><a href="logout.php">Cerrar Sesion</a></li>
+					</ul>';
             
         } else {
 		$front_table = '<span class="picContainer picImg"><img src="vista/plantilla/imagenes/motor.jpg" class="imgimportada" ></span>
@@ -51,16 +54,9 @@
 	        </li>
 	     </ul>
 	     </form>	';
-		$menu = '<li><a href="inicio.php">Inicio</a></li>
-				<li class="drop"><a href="#">Mantenedor</a>
-        				<ul class="sub_menu">
-        					<li><a href="tiposvehiculos.php">Tipos vehiculos</a></li>
-							<li><a href="vehiculos.php">Vehiculos</a></li>
-							<li><a href="usuarios.php">Usuarios</a></li>
-					    </ul>
-        		</li>
-        		<li><a href="logout.php">Cerrar sesion</a></li>'
-				;
+		$menu = '<ul id="menu">
+			    <li><a href="inicio.php">Home</a></li>
+			</ul>';
 		}
 		 
 		 $front='<center><h3> Motores mosquitos, la mejor empresa de vehiculos del pais. <h3></center>';
