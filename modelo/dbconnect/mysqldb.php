@@ -13,7 +13,7 @@ final class MySqlCon extends mysqli {
     private static $host_bd = 'localhost';
     private static $user_bd = 'root';
     private static $pass_bd = '';
-    protected $name_bd = 'biblioteca';
+    protected $name_bd = 'motor_mosquito';
     
     public function  __construct() {
     	//parent:: se utiliza para instancias metodos estaticos desde la clase madre

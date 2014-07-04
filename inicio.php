@@ -1,9 +1,12 @@
  <?php 
- 
+if (!file_exists('config.txt')) {
+        header('Status: 301 Moved Permanently', false, 301);
+        header('Location:controlador/modificarTablas.php');
+    } else {
+
 
 	    require_once 'vista/libsigma/Sigma.php';
 	   
-	
 	 	$plantilla = new HTML_Template_Sigma('vista/plantilla/');
 		$plantilla->loadTemplateFile('sitio.tlp.html');
 		
@@ -36,7 +39,7 @@
             
         } else {
 		$front_table = '<span class="picContainer picImg"><img src="vista/plantilla/imagenes/motor.jpg" class="imgimportada" ></span>
-		<form class="formulario" action="./vista/validaciones.php" method="post" onsubmit="return validarFormauth()">
+		<form class="formulario" action="./controlador/autentificar.php" method="post" onsubmit="validarFormulario()">
 	     <ul>
 	        <li>
 	            <h2>Iniciar Sesión</h2>
@@ -60,10 +63,8 @@
 		}
 		 
 		 $front='<center><h3> Motores mosquitos, la mejor empresa de vehiculos del pais. <h3></center>';
-                                
-                          
-         
-		 
+        
+		
 	    $plantilla->setVariable('titulo',$titulo);
 	    $plantilla->setVariable('titulo_front',$titulo_front);
 	    $plantilla->setVariable('front_table',$front_table);
@@ -71,4 +72,5 @@
 	    $plantilla -> setVariable('barra_navegacion', $menu);
 	    $plantilla->parse();
 	    $plantilla->show();
+	    }
 ?>

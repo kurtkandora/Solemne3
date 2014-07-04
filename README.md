@@ -10,3 +10,5 @@ Todo List
 
 para hacerlo con css
 http://line25.com/tutorials/how-to-create-a-pure-css-dropdown-menu
+
+--Borrar config.txt antes de enviar
