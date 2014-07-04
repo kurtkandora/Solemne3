@@ -24,7 +24,7 @@
 			$titulo = 'Mantenedor Tipo Vehiculos';
 			$listaTipoVehiculos = '';
 			$TipoVehiculoDAO= new tipo_de_vehiculoDAO();
-            $listaTipoVehiculos = $vehiculoDAO->listarVehiculos();
+            $listaTipoVehiculos = $vehiculoDAO->listarTipoVehiculos();
 			for ($i=0; $i < sizeof($listaTipoVehiculos); $i++) {
                 $tablatipovehiculos.='<tr><td>'.$listaTipoVehiculos[$i]->id_tipo_vehiculo.'</td><td>'.$listaTipoVehiculos[$i]->nombre_tipo_vehiculo.'</td><td>'.
                 					  $listaTipoVehiculos[$i]->descripcion_tipo_vehiculo.'</td>';
