@@ -416,3 +416,20 @@ img {
 #menu ul li:last-child > a {
     border-radius: 0 0 3px 3px;
 }
+
+table {
+	margin: 10px 0 30px 0;
+}
+
+table tr th, table tr td {
+	background: url(../imagenes/activeMenu.jpg) repeat-x;
+	color: #FFF;
+	padding: 7px 4px;
+	text-align: left;
+}
+
+table tr td {
+	background: #222;
+	color: #FFF;
+	border-top: 1px solid #FFF;
+}

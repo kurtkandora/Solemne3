@@ -19,15 +19,20 @@
             header('Location:inicio.php');
             exit();
         } else {
-        	require_once dirname(__FILE__).'/modelo/usuario.php';
+        	require_once 'modelo/dbo_model/vehiculoDAO.php';
             $usuario = $_SESSION['usuario'];
 			$titulo = 'Mantenedor Vehiculos';
-			$listaVehiculos = '';
+            $vehiculoDAO= new vehiculoDAO();
+			$listaVehiculos = $vehiculoDAO->listarVehiculos();
+            if(sizeof($listaVehiculos)>0)
+            {
 			for ($i=0; $i < sizeof($listaVehiculos); $i++) {
                 $tablavehiculos.='<tr><td>'.$listaVehiculos[$i]->id_vehiculo.'</td><td>'.$listaVehiculos[$i]->id_tipo_vehiculo.'</td><td>'.$listaVehiculos[$i]->fabricante_vehiculo.'</td>
                 <td>'.$listaVehiculos[$i]->modelo_vehiculo.'</td><td>'.$listaVehiculos[$i]->anio_fabricacion.'</td><td>'.$listaVehiculos[$i]->descripcion_vehiculo.'</td>';
-                $tablavehiculos.='<td><form action="controlador/eliminarUsuario.php" method="post" ><input type="hidden" name="id_usuarioel" id="id_usuarioel" value="'.$listaVehiculos[$i]->id_vehiculo.'" />
+                $tablavehiculos.='<td><form action="controlador/eliminarVehiculo.php" method="post" >
+                <input type="hidden" name="id_usuarioel" id="id_usuarioel" value="'.$listaVehiculos[$i]->id_vehiculo.'" />
 				<input type="submit" name="eliminar"></input></form></tr>';
+            }
             }
 		 $titulo_front = '<h2>Bienvenido</h2>
 							<p>En esta pagina usted podra agregar, eliminar
@@ -46,7 +51,7 @@
 					    <li><a href="logout.php">Cerrar Sesion</a></li>
 					</ul>';
 			
-            $front_table = '<form class="formularioregistroVehiculos" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
+            $front_table = '<form class="formulario" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
              <ul>
                 <li>
                      <h2>Registrar Vehiculos</h2>
@@ -57,22 +62,22 @@
                     <span id="errnum" style="color:red"></span>
                 </li>
                 <li>
-                    <label for="fabricante">Fabricante Vehiculo</label>
+                    <label for="fabricante">Fabricante</label>
                     <input type="text" name="fabricante" id="fabricante" placeholder="Toyota" onblur="validarnombre()"  />
                     <span id="errnombre" style="color:red"></span>
                 </li>
                 <li>
-                    <label for="modelo">Modelo Vehiculo</label>
+                    <label for="modelo">Modelo</label>
                     <input type="text" name="modelo id="modelo" placeholder="L2000" onblur="validarnombre()"  />
                     <span id="errnombre" style="color:red"></span>
                 </li>
                 <li>
-                    <label for="anofabrica">Año Fabricacion</label>
+                    <label for="anofabrica">Fabricacion</label>
                     <input type="text" name="anofabrica" id="anofabrica" placeholder="01-01-2000" onblur="asdsaasd"  />
                     <span id="errfecha" style="color:red"></span>
                 </li>
                 <li>
-                	<label name="lblingreso">Mensaje</label>
+                	<label name="lblingreso">Descripcion</label>
 				    <textarea name="txtmensaje" cols="50" rows="6" id="txtmensaje"> </textarea>
                 </li>
                  <button class="submit" type="submit" name="submit">Guardar</button>
@@ -87,7 +92,7 @@
                 <th>ID Tipo Vehiculo</th>
                 <th>Fanbricante Vehiculo</th>
                 <th>Modelo Vehiculo</th>
-                <th>Año Fabricacion/th>
+                <th>Fabricacion</th>
                 <th>Descripcion Vehiculo<th>
                 </tr>
             </thead>
@@ -111,4 +116,5 @@
 	    $plantilla ->setVariable('barra_navegacion', $menu);
 	    $plantilla->parse();
 	    $plantilla->show();
+}
 ?>

@@ -1,7 +1,7 @@
 <?php
-require_once '../modelo/dbconnect/mysqldb.php';
-require_once '../modelo/dto_model/vehiculo.php';
-class Tipo_de_vehiculo {
+require_once 'modelo/dbconnect/mysqldb.php';
+require_once 'modelo/dto_model/vehiculo.php';
+class vehiculoDAO {
 
     function insertarVehiculo($vehiculo) {
         if(!$this->validar($vehiculo->modelo_vehiculo)) 

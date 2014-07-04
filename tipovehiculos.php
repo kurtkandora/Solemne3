@@ -19,14 +19,16 @@
             header('Location:inicio.php');
             exit();
         } else {
-        	require_once dirname(__FILE__).'/modelo/usuario.php';
+        	require_once 'modelo/dbo_model/tipo_de_vehiculoDAO.php';
             $usuario = $_SESSION['usuario'];
-			$titulo = 'Mantenedor Vehiculos';
+			$titulo = 'Mantenedor Tipo Vehiculos';
 			$listaTipoVehiculos = '';
+			$TipoVehiculoDAO= new tipo_de_vehiculoDAO();
+            $listaTipoVehiculos = $vehiculoDAO->listarVehiculos();
 			for ($i=0; $i < sizeof($listaTipoVehiculos); $i++) {
                 $tablatipovehiculos.='<tr><td>'.$listaTipoVehiculos[$i]->id_tipo_vehiculo.'</td><td>'.$listaTipoVehiculos[$i]->nombre_tipo_vehiculo.'</td><td>'.
                 					  $listaTipoVehiculos[$i]->descripcion_tipo_vehiculo.'</td>';
-                $tablatipovehiculos.='<td><form action="controlador/eliminarUsuario.php" method="post" ><input type="hidden" name="id_tipo_vehiculo" id="id_tipo_vehiculo" value="'
+                $tablatipovehiculos.='<td><form action="controlador/eliminarTipoVehiculo.php" method="post" ><input type="hidden" name="id_tipo_vehiculo" id="id_tipo_vehiculo" value="'
                                       .$listaTipoVehiculos[$i]->id_tipo_vehiculo.'"/>
 				                      <input type="submit" name="eliminar"></input></form></tr>';
             }
@@ -47,21 +49,21 @@
 					    <li><a href="logout.php">Cerrar Sesion</a></li>
 					</ul>';
 			
-            $front_table = '<form class="formularioregistroTipoVehiculos" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
+            $front_table = '<form class="formulario" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
              <ul>
                 <li>
                      <h2>Registrar Tipo Vehiculos</h2>
                 </li>
                 <li>
-                    <label for="nombretipo">Nombre Tipo Vehiculo</label>
+                    <label for="nombretipo">Tipo Vehiculo</label>
                     <input type="text" name="nombretipo" id="nombretipo" placeholder="4x4" onblur="validarnombre()"  />
                     <span id="errnombre" style="color:red"></span>
                 </li>
-                <li>
-                	<label name="lblingresomen">Descripcion Tipo Vehiculo</label>
-				    <textarea name="txtmensaje1" cols="50" rows="6" id="txtmensaje1"> </textarea>
-                </li>
-                 <button class="submit" type="submit" name="submit">Guardar</button>
+               <li>
+				<label name="lblingreso">Descripcion</label>
+				<textarea name="txtmensaje" cols="50" rows="6" id="txtmensaje"> </textarea>
+				</li>
+               <li> <button class="submit" type="submit" name="submit">Guardar</button></li>
              </ul>
              </form>';
             
@@ -94,4 +96,5 @@
 	    $plantilla -> setVariable('barra_navegacion', $menu);
 	    $plantilla->parse();
 	    $plantilla->show();
+}
 ?>
