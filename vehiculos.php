@@ -20,6 +20,7 @@
             exit();
         } else {
         	require_once 'modelo/dbo_model/vehiculoDAO.php';
+			require_once 'modelo/dbo_model/tipo_de_vehiculoDAO.php';
             $usuario = $_SESSION['usuario'];
 			$titulo = 'Mantenedor Vehiculos';
             $vehiculoDAO= new vehiculoDAO();
@@ -27,7 +28,7 @@
             if(sizeof($listaVehiculos)>0)
             {
 			for ($i=0; $i < sizeof($listaVehiculos); $i++) {
-                $tablavehiculos.='<tr><td>'.$listaVehiculos[$i]->id_vehiculo.'</td><td>'.$listaVehiculos[$i]->id_tipo_vehiculo.'</td><td>'.$listaVehiculos[$i]->fabricante_vehiculo.'</td>
+                $tablavehiculos.='<tr><td>'.$listaVehiculos[$i]->id_vehiculo.'</td><td>'.$listaVehiculos[$i]->nombre_tipo_vehiculo.'</td><td>'.$listaVehiculos[$i]->fabricante_vehiculo.'</td>
                 <td>'.$listaVehiculos[$i]->modelo_vehiculo.'</td><td>'.$listaVehiculos[$i]->anio_fabricacion.'</td><td>'.$listaVehiculos[$i]->descripcion_vehiculo.'</td>';
                 $tablavehiculos.='<td><form action="controlador/eliminarVehiculo.php" method="post" >
                 <input type="hidden" name="id_usuarioel" id="id_usuarioel" value="'.$listaVehiculos[$i]->id_vehiculo.'" />
@@ -50,16 +51,26 @@
 					    </li>
 					    <li><a href="logout.php">Cerrar Sesion</a></li>
 					</ul>';
+		
+		$tipo_vehiculoDAO= new tipo_de_vehiculoDAO();	
+		$lista_tipo_vehiculo = $tipo_vehiculoDAO -> listarTipoVehiculos();
+		
+		$fron_table .='<form class="formulario" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
+						<ul>
+                			<li>
+                    			 <h2>Registrar Vehiculos</h2>
+                			</li>';
+        $size_tipo = sizeof($lista_tipo_vehiculo);
+        if ($size_tipo > 0) {
+            for ($i = 0; $i < $size_tipo; $i++) {
+                $front_table .= '<option value="' . $lista_tipo_vehiculo[$i] -> id_tipo_vehiculo . '">' . $lista_tipo_vehiculo[$i] -> nombre_tipo_vehiculo . '</option>';
+            }
+        }	
 			
-            $front_table = '<form class="formulario" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
-             <ul>
+            $front_table .= '
                 <li>
-                     <h2>Registrar Vehiculos</h2>
-                </li>
-                <li>
-                    <label for="idvehiculo">ID Tipo Vehiculo</label>
-                    <input type="text" name="idtipo" id="idtipo" placeholder="1" onblur="validarnumero()"  />
-                    <span id="errnum" style="color:red"></span>
+                    <select id="editorial" name="editorial" ><option value="none" selected="selected">-- Tipo --</option>
+                    </select>
                 </li>
                 <li>
                     <label for="fabricante">Fabricante</label>
@@ -83,13 +94,15 @@
                  <button class="submit" type="submit" name="submit">Guardar</button>
              </ul>
              </form>';
-            
+			 
+			 
+			         
 			$front='<form class="formularioactuariza" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
             <table>
             <thead>
                 <tr>
                 <th>ID Vehiculo</th>
-                <th>ID Tipo Vehiculo</th>
+                <th>Tipo Vehiculo</th>
                 <th>Fanbricante Vehiculo</th>
                 <th>Modelo Vehiculo</th>
                 <th>Fabricacion</th>
@@ -101,6 +114,10 @@
             </tbody>
             </table>
             </form>';
+			
+			
+			
+			
         
 		}
 		 
