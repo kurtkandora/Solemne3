@@ -3,7 +3,7 @@ require_once '../modelo/dbconnect/mysqldb.php';
 require_once '../modelo/dto_model/tipo_de_vehiculo.php';
 class Tipo_de_vehiculo {
 
-    function insertarVehiculo($vehiculo) {
+    function insertarTipoVehiculo($vehiculo) {
         if(!$this->validar($vehiculo->nombre)) 
         {   
         $conexion = new MySqlCon();
