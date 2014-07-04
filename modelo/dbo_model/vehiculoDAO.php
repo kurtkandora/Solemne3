@@ -4,14 +4,14 @@ require_once '../modelo/dto_model/vehiculo.php';
 class Tipo_de_vehiculo {
 
     function insertarVehiculo($vehiculo) {
-        if(!$this->validar($vehiculo->nombre)) 
+        if(!$this->validar($vehiculo->modelo_vehiculo)) 
         {   
         $conexion = new MySqlCon();
         try {
             
-            $sqlQuery = 'INSERT INTO `tipo_de_vehiculo`(`NOMBRE_TIPO_VEHICULO`, `DESCRIPCION_TIPO_VEHICULO`) VALUES (?,?)';
+            $sqlQuery = 'INSERT INTO `INSERT INTO `vehiculo`( `ID_TIPO_VEHICULO`, `FABRICANTE_VEHICULO`, `MODELO_VEHICULO`, `ANIO_FABRICACION`, `DESCRIPCION_VEHICULO`) VALUES (?,?,?,?,?)';
             $sentencia = $conexion -> prepare($sqlQuery);
-            $sentencia -> bind_param("ss", $vehiculo->nombre_tipo_vehiculo,$vehiculo->descripcion_tipo_Vehiculo);
+            $sentencia -> bind_param("issss", $vehiculo->id_tipo_vehiculo,$vehiculo->fabricante_vehiculo,$vehiculo->modelo_vehiculo,$vehiculo->anio_fabricacion,$vehiculo->descripcion_vehiculo);
             if ($sentencia -> execute()) {
                 $valido = TRUE;
             } else {
@@ -25,12 +25,12 @@ class Tipo_de_vehiculo {
         }
         else{return false;}
     }
-        function validar($nombre) {
+        function validar($modelo_vehiculo) {
         $conexion = new MySqlCon();
         try {
-            $sqlQuery = 'SELECT COUNT(*)FROM `tipo_de_vehiculo` WHERE UPPER(TRIM(`nombre_tipo_vehiculo`)) = UPPER(TRIM(?))';
+            $sqlQuery = 'SELECT COUNT(*)FROM `vehiculo` WHERE UPPER(TRIM(`MODELO_VEHICULO`)) = UPPER(TRIM(?))';
             $sentencia = $conexion -> prepare($sqlQuery);
-            $sentencia -> bind_param("s", $nombre);
+            $sentencia -> bind_param("s", $modelo_vehiculo);
             if ($sentencia -> execute()) {
                 $sentencia -> bind_result($cantidad);
                 while ($sentencia -> fetch()) {
@@ -47,20 +47,23 @@ class Tipo_de_vehiculo {
         }
         return $verificador;
     }
-    function listarTipoVehiculos() {
+    function listarVehiculos() {
         $conexion = new MySqlCon();
         $arreglo=array();
         $indice = 0;
         try {
-            $sqlQuery = 'SELECT `ID_TIPO_VEHICULO`, `NOMBRE_TIPO_VEHICULO`, `DESCRIPCION_TIPO_VEHICULO` FROM `tipo_de_vehiculo`';
+            $sqlQuery = 'SELECT `ID_VEHICULO`,`ID_TIPO_VEHICULO`, `FABRICANTE_VEHICULO`, `MODELO_VEHICULO`, `ANIO_FABRICACION`, `DESCRIPCION_VEHICULO` FROM `vehiculo`';
             $sentencia = $conexion -> prepare($sqlQuery);
             if ($sentencia -> execute()) {
-                $sentencia -> bind_result($id_tipo_vehiculo, $nombre_tipo_vehiculo,$descripcion_tipo_Vehiculo);
+                $sentencia -> bind_result($id_vehiculo,$id_tipo_vehiculo,$fabricante_vehiculo,$modelo_vehiculo,$anio_fabricacion,$descripcion_vehiculo);
                 while ($sentencia -> fetch()) {
-                    $objeto = new Tipo_de_vehiculo();
+                    $objeto = new Vehiculo();
+                    $objeto -> id_vehiculo = $id_vehiculo;
                     $objeto -> id_tipo_vehiculo = $id_tipo_vehiculo;
-                    $objeto -> nombre_tipo_vehiculo = $nombre_tipo_vehiculo;
-                    $objeto -> descripcion_tipo_Vehiculo = $descripcion_tipo_Vehiculo;
+                    $objeto -> fabricante_vehiculo = $fabricante_vehiculo;
+                    $objeto -> modelo_vehiculo = $modelo_vehiculo;
+                    $objeto -> anio_fabricacion = $anio_fabricacion;
+                    $objeto -> descripcion_vehiculo = $descripcion_vehiculo;
                     $arreglo[$indice] = $objeto;
                     $indice++;
                 }
@@ -72,13 +75,13 @@ class Tipo_de_vehiculo {
         return $arreglo;
     }
 
-    function eliminarTipoVehiculos($id_tipo_vehiculo) {
+    function eliminarVehiculos($id_vehiculo) {
         $conexion = new MySqlCon();
         $del_valido;
         try {
-            $sqlQuery = 'DELETE FROM `tipo_de_vehiculo` WHERE `ID_TIPO_VEHICULO`=?';
+            $sqlQuery = 'DELETE FROM `vehiculo` WHERE `ID_VEHICULO`=?';
             $sentencia = $conexion -> prepare($sqlQuery);
-            $sentencia -> bind_param("i", $id_tipo_vehiculo);
+            $sentencia -> bind_param("i", $id_vehiculo);
             if ($sentencia -> execute()) {
                 $del_valido = TRUE;
             } else {
