@@ -1,16 +1,17 @@
 <?php
-require_once './dbconnect/mysqldb.php';
+require_once '../modelo/dbconnect/mysqldb.php';
+require_once '../modelo/dto_model/tipo_de_vehiculo.php';
 class Tipo_de_vehiculo {
 
     function insertarVehiculo($vehiculo) {
-        if(!$this->validar($nombre)) 
+        if(!$this->validar($vehiculo->nombre)) 
         {   
         $conexion = new MySqlCon();
         try {
             
-            $sqlQuery = 'INSERT INTO `editorial`(`nombre_editorial`) VALUES (?)';
+            $sqlQuery = 'INSERT INTO `tipo_de_vehiculo`(`NOMBRE_TIPO_VEHICULO`, `DESCRIPCION_TIPO_VEHICULO`) VALUES (?,?)';
             $sentencia = $conexion -> prepare($sqlQuery);
-            $sentencia -> bind_param("s", $nombre_editorial);
+            $sentencia -> bind_param("ss", $vehiculo->nombre_tipo_vehiculo,$vehiculo->descripcion_tipo_Vehiculo);
             if ($sentencia -> execute()) {
                 $valido = TRUE;
             } else {
@@ -46,19 +47,20 @@ class Tipo_de_vehiculo {
         }
         return $verificador;
     }
-    function listarEditoriales() {
+    function listarTipoVehiculos() {
         $conexion = new MySqlCon();
         $arreglo=array();
         $indice = 0;
         try {
-            $sqlQuery = 'SELECT `ID_EDITORIAL`, `NOMBRE_EDITORIAL` FROM `EDITORIAL`';
+            $sqlQuery = 'SELECT `ID_TIPO_VEHICULO`, `NOMBRE_TIPO_VEHICULO`, `DESCRIPCION_TIPO_VEHICULO` FROM `tipo_de_vehiculo`';
             $sentencia = $conexion -> prepare($sqlQuery);
             if ($sentencia -> execute()) {
-                $sentencia -> bind_result($id_editorial, $nombre_editorial);
+                $sentencia -> bind_result($id_tipo_vehiculo, $nombre_tipo_vehiculo,$descripcion_tipo_Vehiculo);
                 while ($sentencia -> fetch()) {
-                    $objeto = new Editorial();
-                    $objeto -> id_editorial = $id_editorial;
-                    $objeto -> nombre_editorial = $nombre_editorial;
+                    $objeto = new Tipo_de_vehiculo();
+                    $objeto -> id_tipo_vehiculo = $id_tipo_vehiculo;
+                    $objeto -> nombre_tipo_vehiculo = $nombre_tipo_vehiculo;
+                    $objeto -> descripcion_tipo_Vehiculo = $descripcion_tipo_Vehiculo;
                     $arreglo[$indice] = $objeto;
                     $indice++;
                 }
@@ -70,14 +72,13 @@ class Tipo_de_vehiculo {
         return $arreglo;
     }
 
-    function eliminarEditoriale($id_editorial) {
+    function eliminarTipoVehiculos($id_tipo_vehiculo) {
         $conexion = new MySqlCon();
-        $fecha = date('Y-m-d H:i:s');
         $del_valido;
         try {
-            $sqlQuery = 'DELETE FROM `editorial` WHERE `id_editorial`=?';
+            $sqlQuery = 'DELETE FROM `tipo_de_vehiculo` WHERE `ID_TIPO_VEHICULO`=?';
             $sentencia = $conexion -> prepare($sqlQuery);
-            $sentencia -> bind_param("i", $id_editorial);
+            $sentencia -> bind_param("i", $id_tipo_vehiculo);
             if ($sentencia -> execute()) {
                 $del_valido = TRUE;
             } else {
