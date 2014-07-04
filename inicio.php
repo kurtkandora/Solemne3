@@ -22,7 +22,17 @@ if (!file_exists('config.txt')) {
         if (isset($_SESSION['usuario'])) {
             $front_table = '<span class="picContainer picImg"><img src="vista/plantilla/imagenes/motor.jpg" class="imgimportada" ></span>
             				<h2>Felicidades</h2>
-							<p>Inicio de sesion correct. Bienvenido Sr(a). '.$_SESSION['usuario'].'</p>';
+							<p>Inicio de sesion correcto.
+							 Bienvenido Sr(a). '.$_SESSION['usuario'].'</p>
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />';
 			
 			$menu = '<ul id="menu">
 					    <li><a href="inicio.php">Home</a></li>
