@@ -19,7 +19,7 @@
             header('Location:inicio.php');
             exit();
         } else {
-        	require_once '/modelo/dbo_model/tipo_de_vehiculoDAO.php';
+        	require_once dirname(__FILE__).'/modelo/usuario.php';
             $usuario = $_SESSION['usuario'];
 			$titulo = 'Mantenedor Vehiculos';
 			$listaVehiculos = '';
@@ -111,5 +111,4 @@
 	    $plantilla ->setVariable('barra_navegacion', $menu);
 	    $plantilla->parse();
 	    $plantilla->show();
-	}  
 ?>
