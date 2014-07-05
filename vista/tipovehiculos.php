@@ -1,15 +1,15 @@
  <?php 
  
 
- 		if(!file_exists('config.txt'))
+ 		if(!file_exists('../config.txt'))
         {
             header('Status: 301 Moved Permanently', false, 301);
-            header('Location:controlador/modificarTablas.php'); 
+            header('Location:../controlador/modificarTablas.php'); 
         }
     else{
         
-    require_once 'vista/libsigma/Sigma.php';
-        $plantilla = new HTML_Template_Sigma('vista/plantilla/');
+    require_once 'libsigma/Sigma.php';
+        $plantilla = new HTML_Template_Sigma('plantilla/');
         $plantilla -> loadTemplateFile('sitio.tlp.html');
 		$tablatipovehiculos='';
         $datos_usuario;
@@ -19,7 +19,7 @@
             header('Location:inicio.php');
             exit();
         } else {
-        	require_once 'modelo/dbo_model/tipo_de_vehiculoDAO.php';
+        	require_once '../modelo/dbo_model/tipo_de_vehiculoDAO.php';
             $usuario = $_SESSION['usuario'];
 			$titulo = 'Mantenedor Tipo Vehiculos';
 			$listaTipoVehiculos = '';
@@ -28,7 +28,7 @@
 			for ($i=0; $i < sizeof($listaTipoVehiculos); $i++) {
                 $tablatipovehiculos.='<tr><td>'.$listaTipoVehiculos[$i]->id_tipo_vehiculo.'</td><td>'.$listaTipoVehiculos[$i]->nombre_tipo_vehiculo.'</td><td>'.
                 					  $listaTipoVehiculos[$i]->descripcion_tipo_vehiculo.'</td>';
-                $tablatipovehiculos.='<td> <a href="mantenedorTipoVehiculo.php?del='.$listaTipoVehiculos[$i]->id_tipo_vehiculo.'">
+                $tablatipovehiculos.='<td> <a href="../controlador/mantenedorTipoVehiculo.php?del='.$listaTipoVehiculos[$i]->id_tipo_vehiculo.'">
             Eliminar</a></td> </tr>';
             }
 		 $titulo_front = '<h2>Bienvenido</h2>
@@ -48,7 +48,7 @@
 					    <li><a href="logout.php">Cerrar Sesion</a></li>
 					</ul>';
 			
-            $front_table = '<form class="formulario" action="controlador/mantenedorTipoVehiculo.php" method="post">
+            $front_table = '<form class="formulario" action="../controlador/mantenedorTipoVehiculo.php" method="post">
              <ul>
                 <li>
                      <h2>Registrar o actualizar Tipo Vehiculos</h2>

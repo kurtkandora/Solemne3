@@ -1,15 +1,15 @@
  <?php 
  
 
- 		if(!file_exists('config.txt'))
+ 		if(!file_exists('../config.txt'))
         {
             header('Status: 301 Moved Permanently', false, 301);
-            header('Location:controlador/modificarTablas.php'); 
+            header('Location:../controlador/modificarTablas.php'); 
         }
     else{
         
-    require_once 'vista/libsigma/Sigma.php';
-        $plantilla = new HTML_Template_Sigma('vista/plantilla/');
+    require_once 'libsigma/Sigma.php';
+        $plantilla = new HTML_Template_Sigma('plantilla/');
         $plantilla -> loadTemplateFile('sitio.tlp.html');
 		$tablavehiculos='';
         $datos_usuario;
@@ -19,8 +19,8 @@
             header('Location:inicio.php');
             exit();
         } else {
-        	require_once 'modelo/dbo_model/vehiculoDAO.php';
-			require_once 'modelo/dbo_model/tipo_de_vehiculoDAO.php';
+        	require_once '../modelo/dbo_model/vehiculoDAO.php';
+			require_once '../modelo/dbo_model/tipo_de_vehiculoDAO.php';
             $usuario = $_SESSION['usuario'];
 			$titulo = 'Mantenedor Vehiculos';
             $vehiculoDAO= new vehiculoDAO();
@@ -30,7 +30,7 @@
 			for ($i=0; $i < sizeof($listaVehiculos); $i++) {
                 $tablavehiculos.='<tr><td>'.$listaVehiculos[$i]->id_vehiculo.'</td><td>'.$listaVehiculos[$i]->nombre_tipo_vehiculo.'</td><td>'.$listaVehiculos[$i]->fabricante_vehiculo.'</td>
                 <td>'.$listaVehiculos[$i]->modelo_vehiculo.'</td><td>'.$listaVehiculos[$i]->anio_fabricacion.'</td><td>'.$listaVehiculos[$i]->descripcion_vehiculo.'</td>';
-                $tablavehiculos.='<td><a href="mantenedorVehiculo.php?del='.$listaVehiculos[$i]->id_vehiculo.'">
+                $tablavehiculos.='<td><a href="../mantenedorVehiculo.php?del='.$listaVehiculos[$i]->id_vehiculo.'">
             Eliminar</a></td></tr>';
             }
             }
@@ -54,7 +54,7 @@
 		$tipo_vehiculoDAO= new tipo_de_vehiculoDAO();	
 		$lista_tipo_vehiculo = $tipo_vehiculoDAO -> selectAll();
 		
-		$front_table ='<form class="formulario" action="controlador/mantenedorVehiculo.php" method="post" onsubmit="return validarFormulario()">
+		$front_table ='<form class="formulario" action="../controlador/mantenedorVehiculo.php" method="post" onsubmit="return validarFormulario()">
 						<ul>
                 			<li>
                     			 <h2>Registrar Vehiculos</h2>

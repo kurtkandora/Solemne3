@@ -1,7 +1,7 @@
 <?php
     if (file_exists('../config.txt')) {
         header('Status: 301 Moved Permanently', false, 301);
-        header('Location:../inicio.php');
+        header('Location:../vista/inicio.php');
     } else {
         require_once '../modelo/dbconnect/mysqldb.php';
         try {
@@ -19,6 +19,6 @@
         fclose($fp);
      
         header('Status: 301 Moved Permanently', false, 301);
-        header('Location:../inicio.php');
+        header('Location:../vista/inicio.php');
 }
 ?>

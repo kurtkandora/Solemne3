@@ -17,13 +17,13 @@
 		 }
 		else{
 			header('Status: 301 Moved Permanently', false, 301);
-            header('Location:../inicio.php');
+            header('Location:../vista/inicio.php');
             exit();
 		}
 	   }
 	   else{
        	header('Status: 301 Moved Permanently', false, 301);
-        header('Location:../inicio.php');
+        header('Location:../vista/inicio.php');
         exit();
 	   }
 			

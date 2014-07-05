@@ -1,7 +1,7 @@
 <?php
-require_once 'modelo/dto_model/vehiculo.php';
+require_once '../modelo/dto_model/vehiculo.php';
 require_once 'db_abstract_model.php';
-require_once 'modelo/dbconnect/mysqldb.php';
+require_once '../modelo/dbconnect/mysqldb.php';
 class vehiculoDAO extends DBAbstractModel {
 
     private $mysql_con;

@@ -1,13 +1,13 @@
  <?php 
-if (!file_exists('config.txt')) {
+if (!file_exists('../config.txt')) {
         header('Status: 301 Moved Permanently', false, 301);
-        header('Location:controlador/modificarTablas.php');
+        header('Location:../controlador/modificarTablas.php');
     } else {
 
 
-	    require_once 'vista/libsigma/Sigma.php';
+	    require_once 'libsigma/Sigma.php';
 	   
-	 	$plantilla = new HTML_Template_Sigma('vista/plantilla/');
+	 	$plantilla = new HTML_Template_Sigma('plantilla/');
 		$plantilla->loadTemplateFile('sitio.tlp.html');
 		
 		$titulo='Motor Mosquito';
@@ -20,7 +20,7 @@ if (!file_exists('config.txt')) {
 
         session_start();
         if (isset($_SESSION['usuario'])) {
-            $front_table = '<span class="picContainer picImg"><img src="vista/plantilla/imagenes/motor.jpg" class="imgimportada" ></span>
+            $front_table = '<span class="picContainer picImg"><img src="plantilla/imagenes/motor.jpg" class="imgimportada" ></span>
             				<h2>Felicidades</h2>
 							<p>Inicio de sesion correcto.
 							 Bienvenido Sr(a). '.$_SESSION['usuario'].'</p>
@@ -48,8 +48,8 @@ if (!file_exists('config.txt')) {
 					</ul>';
             
         } else {
-		$front_table = '<span class="picContainer picImg"><img src="vista/plantilla/imagenes/motor.jpg" class="imgimportada" ></span>
-		<form class="formulario" action="./controlador/autentificar.php" method="post" onsubmit="validarFormulario()">
+		$front_table = '<span class="picContainer picImg"><img src="plantilla/imagenes/motor.jpg" class="imgimportada" ></span>
+		<form class="formulario" action="../controlador/autentificar.php" method="post" onsubmit="validarFormulario()">
 	     <ul>
 	        <li>
 	            <h2>Iniciar Sesión</h2>

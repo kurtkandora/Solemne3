@@ -1,12 +1,13 @@
 <?php
-require_once './modelo/dbo_model/usuariosDAO.php';
-require_once './modelo/dto_model/usuarios.php';
+echo (realpath ('../modelo/dbo_model/usuariosDAO.php'));
+require_once '../modelo/dbo_model/usuariosDAO.php';
+require_once '../modelo/dto_model/usuarios.php';
 require_once './validaciones.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' | $_SERVER['REQUEST_METHOD'] == 'POST') {
     $validaciones = new Validaciones();
     $usuario_model = new Usuariosdb();
-    $usuario = new Usuario();
+    $usuario = new Usuarios();
 
     switch ($_SERVER['REQUEST_METHOD']) {
 
@@ -44,5 +45,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' | $_SERVER['REQUEST_METHOD'] == 'POST') 
 
 }
 header('Status: 301 Moved Permanently', false, 301);
-header('Location:../usuarios.php');
+header('Location:../vista/usuarios.php');
 ?>

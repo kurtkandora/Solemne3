@@ -1,7 +1,7 @@
 <?php
-require_once 'modelo/dto_model/usuarios.php';
+require_once '../modelo/dto_model/usuarios.php';
 require_once 'db_abstract_model.php';
-require_once 'modelo/dbconnect/mysqldb.php';
+require_once '../modelo/dbconnect/mysqldb.php';
 class Usuariosdb extends DBAbstractModel {
 
     private $mysql_con;
@@ -69,7 +69,6 @@ class Usuariosdb extends DBAbstractModel {
                 while ($sentencia -> fetch()) {
                     $pass = $recpass;
                 }
-                $this->mysql_con -> close();
             }
         } catch(Exception $e) {
             error_log($e);
@@ -137,7 +136,7 @@ class Usuariosdb extends DBAbstractModel {
                 while ($sentencia -> fetch()) {
                     $objeto = new Usuarios();
                     $objeto -> nombre = $nombre;
-                    $objeto -> contrasena = $password;
+                    $objeto -> password = $password;
                     $objeto -> correo = $correo;
                     $objeto -> id_usuario = $ID_USUARIO;
                     $arreglo[$indice] = $objeto;
@@ -174,6 +173,7 @@ class Usuariosdb extends DBAbstractModel {
         return $reg_valido;
     }
 function __destruct() {
+
         unset($this);
     }
 }

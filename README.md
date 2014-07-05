@@ -1,7 +1,7 @@
 Solemne3
 ========
 
-Solemne 3
+Login: email:admin@localhost.com pass:admin 
 
 Todo List
 

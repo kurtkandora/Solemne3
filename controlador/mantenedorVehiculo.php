@@ -1,6 +1,6 @@
 <?php
-require_once './modelo/dbo_model/vehiculoDAO.php';
-require_once './modelo/dto_model/vehiculo.php';
+require_once '../modelo/dbo_model/vehiculoDAO.php';
+require_once '../modelo/dto_model/vehiculo.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' | $_SERVER['REQUEST_METHOD'] == 'POST') {
     $vehiculo_model = new Vehiculodb();
@@ -41,5 +41,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' | $_SERVER['REQUEST_METHOD'] == 'POST') 
     $vehiculo_model -> __destruct();
 }
 header('Status: 301 Moved Permanently', false, 301);
-header('Location:../vehiculos.php');
+header('Location:../vista/vehiculos.php');
 ?>
