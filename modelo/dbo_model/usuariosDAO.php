@@ -93,7 +93,6 @@ class Usuariosdb extends DBAbstractModel {
                     }
                 }
             }
-            $usuario->__destruct();
         } catch(Exception $e) {
             error_log($e);
             return false;

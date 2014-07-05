@@ -32,14 +32,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' | $_SERVER['REQUEST_METHOD'] == 'POST') 
                 $vehiculo -> id_vehiculo = $_GET['del'];
                 $vehiculo_model -> delete($vehiculo);
             }
+            else if(!empty($_GET['buscar'])){
+                $modelo = $_GET['buscar'];
+                $vehiculo=$vehiculo_model -> select($modelo);
+                header('Status: 301 Moved Permanently', false, 301);
+                header('Location:../vista/vehiculos.php?id_vehiculo='.$vehiculo -> id_vehiculo.
+                '&id_tipo_vehiculo='.$vehiculo -> id_tipo_vehiculo.'&anio_fabricacion='.$vehiculo -> anio_fabricacion.'
+                &descripcion_vehiculo='.$vehiculo -> descripcion_vehiculo.'&fabricante_vehiculo='.$vehiculo -> fabricante_vehiculo.'
+                &modelo_vehiculo='.$vehiculo -> modelo_vehiculo);
+            }
             break;
 
         default :
             break;
     }
+
     $vehiculo -> __destruct();
     $vehiculo_model -> __destruct();
 }
+
 header('Status: 301 Moved Permanently', false, 301);
 header('Location:../vista/vehiculos.php');
+
 ?>

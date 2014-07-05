@@ -51,7 +51,6 @@ class Tipo_de_vehiculoDAO extends DBAbstractModel {
                     }
                 }
             }
-            $tipo_de_vehiculo->__destruct();
         } catch(Exception $e) {
             error_log($e);
            return FALSE;

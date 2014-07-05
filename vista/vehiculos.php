@@ -28,16 +28,21 @@
             if(sizeof($listaVehiculos)>0)
             {
 			for ($i=0; $i < sizeof($listaVehiculos); $i++) {
-                $tablavehiculos.='<tr><td>'.$listaVehiculos[$i]->id_vehiculo.'</td><td>'.$listaVehiculos[$i]->nombre_tipo_vehiculo.'</td><td>'.$listaVehiculos[$i]->fabricante_vehiculo.'</td>
+                $tablavehiculos.='<tr><td>'.$listaVehiculos[$i]->id_vehiculo.'</td><td>'.$listaVehiculos[$i]->id_tipo_vehiculo.'</td><td>'.$listaVehiculos[$i]->fabricante_vehiculo.'</td>
                 <td>'.$listaVehiculos[$i]->modelo_vehiculo.'</td><td>'.$listaVehiculos[$i]->anio_fabricacion.'</td><td>'.$listaVehiculos[$i]->descripcion_vehiculo.'</td>';
-                $tablavehiculos.='<td><a href="../mantenedorVehiculo.php?del='.$listaVehiculos[$i]->id_vehiculo.'">
+                $tablavehiculos.='<td><a href="../controlador/mantenedorVehiculo.php?buscar='.$listaVehiculos[$i]->modelo_vehiculo.'">
+            Modificar</a><a href="../controlador/mantenedorVehiculo.php?del='.$listaVehiculos[$i]->id_vehiculo.'">
             Eliminar</a></td></tr>';
             }
             }
 		 $titulo_front = '<h2>Bienvenido</h2>
 							<p>En esta pagina usted podra agregar, eliminar
 							   y mofidicar los vehiculos de la empresa.
-							</p>';
+							</p>
+							<form class="formulario" action="../controlador/mantenedorVehiculo.php" method="get">
+    <input type="text" name="buscar" id="buscar" value=""/><button id="btn" type="submit"> Buscar </button></form>'
+    ;
+    
 			$menu = '<ul id="menu">
 					    <li><a href="inicio.php">Home</a></li>
 					    <li>
@@ -66,11 +71,26 @@
                 $listatipos .= '<option value="' . $lista_tipo_vehiculo[$i] -> id_tipo_vehiculo . '">' . $lista_tipo_vehiculo[$i] -> nombre_tipo_vehiculo . '</option>';
             }
         }	
+
+$id_vehiculo = '';
+                $anio_fabricacion = '';
+                $descripcion_vehiculo = '';
+                $fabricante_vehiculo = '';
+                $modelo_vehiculo = '';
+if (!empty($_GET['id_vehiculo']) ){
+                $id_vehiculo = $_GET['id_vehiculo'];
+                $anio_fabricacion = $_GET['anio_fabricacion'];
+                $descripcion_vehiculo = $_GET['descripcion_vehiculo'];
+                $fabricante_vehiculo = $_GET['fabricante_vehiculo'];
+                $modelo_vehiculo = $_GET['modelo_vehiculo'];
+}
+
+
 			
             $front_table .= '
                 <li>
                     <label for="nombretipo">ID Vehiculo</label>
-                    <input type="text" placeholder="Ingresar uno para actualizar" name="id_vehiculo" id="id_vehiculo" placeholder="4x4" />
+                    <input type="text" placeholder="Ingresar uno para actualizar" name="id_vehiculo" id="id_vehiculo" value="'.$id_vehiculo.'" placeholder="4x4" />
                 </li>
                 <li>
                 <label for="nombretipo">Tipo Vehiculo</label>
@@ -79,22 +99,22 @@
                 </li>
                 <li>
                     <label for="fabricante">Fabricante</label>
-                    <input type="text" name="fabricante_vehiculo" id="fabricante_vehiculo" placeholder="Toyota" onblur="validarnombre()"  />
+                    <input type="text" name="fabricante_vehiculo" id="fabricante_vehiculo" value="'.$fabricante_vehiculo.'" placeholder="Toyota" onblur="validarnombre()"  />
                     <span id="errnombre" style="color:red"></span>
                 </li>
                 <li>
                     <label for="modelo">Modelo</label>
-                    <input type="text" name="modelo_vehiculo id="modelo_vehiculo" placeholder="L2000" required  />
+                    <input type="text" name="modelo_vehiculo" id="modelo_vehiculo" value="'.$modelo_vehiculo.'" placeholder="L2000" required  />
                     <span id="errnombre" style="color:red"></span>
                 </li>
                 <li>
                     <label for="anofabrica">Año Fabricacion</label>
-                    <input type="text" name="anio_fabricacion" id="anio_fabricacion" placeholder="01-01-2000" required"  />
+                    <input type="text" name="anio_fabricacion" id="anio_fabricacion" value="'.$anio_fabricacion.'" placeholder="01-01-2000" required"  />
                     <span id="errfecha" style="color:red"></span>
                 </li>
                 <li>
                 	<label name="lblingreso">Descripcion</label>
-				    <textarea name="descripcion_vehiculo" cols="50" rows="6" id="descripcion_vehiculo" required>  </textarea>
+				    <textarea name="descripcion_vehiculo" cols="50" rows="6" id="descripcion_vehiculo" value="'.$descripcion_vehiculo.'"  required>  </textarea>
                 </li>
                  <button class="submit" type="submit" name="submit">Guardar</button>
              </ul>
@@ -110,7 +130,8 @@
                 <th>Fanbricante Vehiculo</th>
                 <th>Modelo Vehiculo</th>
                 <th>Fabricacion</th>
-                <th>Descripcion Vehiculo<th>
+                <th>Descripcion Vehiculo</th>
+                <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>

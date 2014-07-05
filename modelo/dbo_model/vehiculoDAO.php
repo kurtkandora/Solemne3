@@ -15,9 +15,10 @@ class vehiculoDAO extends DBAbstractModel {
         {   
         try {
             
-            $sqlQuery = 'INSERT INTO `INSERT INTO `vehiculo`( `ID_TIPO_VEHICULO`, `FABRICANTE_VEHICULO`, `MODELO_VEHICULO`, `ANIO_FABRICACION`, `DESCRIPCION_VEHICULO`) VALUES (?,?,?,?,?)';
+            $sqlQuery = 'INSERT INTO `vehiculo`( `ID_TIPO_VEHICULO`, `FABRICANTE_VEHICULO`, `MODELO_VEHICULO`, `ANIO_FABRICACION`, `DESCRIPCION_VEHICULO`) VALUES (?,?,?,?,?)';
             $sentencia = $this->mysql_con -> prepare($sqlQuery);
             $sentencia -> bind_param("issss", $vehiculo->id_tipo_vehiculo,$vehiculo->fabricante_vehiculo,$vehiculo->modelo_vehiculo,$vehiculo->anio_fabricacion,$vehiculo->descripcion_vehiculo);
+            $sentencia -> execute();
             if ($this -> mysql_con -> affected_rows) {
                     $this -> mysql_con -> commit();
                     $valido= true;
@@ -50,7 +51,6 @@ class vehiculoDAO extends DBAbstractModel {
                     }
                 }
             }
-            $vehiculo->__destruct();
         } catch(Exception $e) {
             error_log($e);
             return false;
@@ -83,6 +83,29 @@ class vehiculoDAO extends DBAbstractModel {
             error_log($e);
         }
         return $arreglo;
+    }
+function select($modelo_vehiculo) {
+        try {
+            $sqlQuery = 'SELECT `ID_VEHICULO`,`ID_TIPO_VEHICULO`, `FABRICANTE_VEHICULO`, `ANIO_FABRICACION`, `DESCRIPCION_VEHICULO` FROM `vehiculo` where MODELO_VEHICULO=? ';
+            $sentencia = $this->mysql_con -> prepare($sqlQuery);
+            $sentencia -> bind_param("i", $modelo_vehiculo);
+            if ($sentencia -> execute()) {
+                $sentencia -> bind_result($id_vehiculo,$id_tipo_vehiculo,$fabricante_vehiculo,$anio_fabricacion,$descripcion_vehiculo);
+                while ($sentencia -> fetch()) {
+                    $objeto = new Vehiculo();
+                    $objeto -> id_vehiculo = $id_vehiculo;
+                    $objeto -> id_tipo_vehiculo = $id_tipo_vehiculo;
+                    $objeto -> fabricante_vehiculo = $fabricante_vehiculo;
+                    $objeto -> modelo_vehiculo = $modelo_vehiculo;
+                    $objeto -> anio_fabricacion = $anio_fabricacion;
+                    $objeto -> descripcion_vehiculo = $descripcion_vehiculo;
+                }
+            }
+            $this->mysql_con -> close();
+        } catch(Exception $e) {
+            error_log($e);
+        }
+        return $objeto;
     }
 
     function delete($vehiculo) {
