@@ -31,9 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' | $_SERVER['REQUEST_METHOD'] == 'POST') 
         default :
             break;
     }
+echo $tipo_de_vehiculo -> descripcion_tipo_Vehiculo ;
     $tipo_de_vehiculo -> __destruct();
     $tipo_de_vehiculo_model -> __destruct();
 }
+/*
 header('Status: 301 Moved Permanently', false, 301);
 header('Location:../vista/tipoVehiculos.php');
+ * */
 ?>
