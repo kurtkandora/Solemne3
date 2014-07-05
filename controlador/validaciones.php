@@ -20,16 +20,6 @@
 				
               } 
 		}
-		public function validaraApellido($value)
-		{
-			 if(! preg_match('/([a-z ñáéíóú]{2,60})$/', $value)) {
-	            return FALSE;
-				 
-              } else{
-              	return TRUE;
-				
-              } 
-		}
 
     }
 ?>

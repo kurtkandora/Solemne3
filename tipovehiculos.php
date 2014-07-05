@@ -24,13 +24,12 @@
 			$titulo = 'Mantenedor Tipo Vehiculos';
 			$listaTipoVehiculos = '';
 			$TipoVehiculoDAO= new tipo_de_vehiculoDAO();
-            $listaTipoVehiculos = $vehiculoDAO->listarTipoVehiculos();
+            $listaTipoVehiculos = $TipoVehiculoDAO->selectALL();
 			for ($i=0; $i < sizeof($listaTipoVehiculos); $i++) {
                 $tablatipovehiculos.='<tr><td>'.$listaTipoVehiculos[$i]->id_tipo_vehiculo.'</td><td>'.$listaTipoVehiculos[$i]->nombre_tipo_vehiculo.'</td><td>'.
                 					  $listaTipoVehiculos[$i]->descripcion_tipo_vehiculo.'</td>';
-                $tablatipovehiculos.='<td><form action="controlador/eliminarTipoVehiculo.php" method="post" ><input type="hidden" name="id_tipo_vehiculo" id="id_tipo_vehiculo" value="'
-                                      .$listaTipoVehiculos[$i]->id_tipo_vehiculo.'"/>
-				                      <input type="submit" name="eliminar"></input></form></tr>';
+                $tablatipovehiculos.='<td> <a href="mantenedorTipoVehiculo.php?del='.$listaTipoVehiculos[$i]->id_tipo_vehiculo.'">
+            Eliminar</a></td> </tr>';
             }
 		 $titulo_front = '<h2>Bienvenido</h2>
 							<p>En esta pagina usted podra agregar, eliminar
@@ -49,25 +48,28 @@
 					    <li><a href="logout.php">Cerrar Sesion</a></li>
 					</ul>';
 			
-            $front_table = '<form class="formulario" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
+            $front_table = '<form class="formulario" action="controlador/mantenedorTipoVehiculo.php" method="post">
              <ul>
                 <li>
-                     <h2>Registrar Tipo Vehiculos</h2>
+                     <h2>Registrar o actualizar Tipo Vehiculos</h2>
+                </li>
+                <li>
+                    <label for="nombretipo">ID Tipo Vehiculo</label>
+                    <input type="text" placeholder="Ingresar uno para actualizar" name="id_tipo_vehiculo" id="id_tipo_vehiculo" placeholder="4x4" />
                 </li>
                 <li>
                     <label for="nombretipo">Tipo Vehiculo</label>
-                    <input type="text" name="nombretipo" id="nombretipo" placeholder="4x4" onblur="validarnombre()"  />
-                    <span id="errnombre" style="color:red"></span>
+                    <input type="text" name="nombre_tipo_vehiculo" id="nombre_tipo_vehiculo" placeholder="4x4" required />
                 </li>
                <li>
 				<label name="lblingreso">Descripcion</label>
-				<textarea name="txtmensaje" cols="50" rows="6" id="txtmensaje"> </textarea>
+				<textarea name="txtmensaje" cols="50" rows="6" id="txtmensaje" required> </textarea>
 				</li>
                <li> <button class="submit" type="submit" name="submit">Guardar</button></li>
              </ul>
              </form>';
             
-			$front='<form class="formularioactuariza" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
+			$front='
             <table>
             <thead>
                 <tr>
@@ -79,8 +81,7 @@
             <tbody>
                '. $tablatipovehiculos.'
             </tbody>
-            </table>
-            </form>';
+            </table>';
         
 		}
 		 

@@ -1,61 +1,75 @@
 <?php
-require_once '../modelo/dbconnect/mysqldb.php';
-require_once '../modelo/dto_model/usuarios.php';
-class Usuariosdb {
+require_once 'modelo/dto_model/usuarios.php';
+require_once 'db_abstract_model.php';
+require_once 'modelo/dbconnect/mysqldb.php';
+class Usuariosdb extends DBAbstractModel {
 
-    function registrarUsuario($usuario) {
+    private $mysql_con;
 
-        $conexion = new MySqlCon();
+    function __construct() {
+        $this -> mysql_con = new MySqlCon();
+    }
+
+    function insert($usuario) {
+
         $reg_valido;
+        if($this->exist($usuario))
+        {return false;}
         try {
             $sqlQuery = 'INSERT INTO `usuarios`(`NOMBRE`, `CORREO`, `PASSWORD`) VALUES (?,?,?)';
-            $sentencia = $conexion -> prepare($sqlQuery);
+            $sentencia = $this->mysql_con -> prepare($sqlQuery);
             $sentencia -> bind_param("sss", $usuario->nombre, $usuario->correo, $usuario->contrasena);
-            if ($sentencia -> execute()) {
-                $valido = TRUE;
-            } else {
-                $valido = FALSE;
-            }
-            $conexion -> close();
+            if ($this -> mysql_con -> affected_rows) {
+                    $this -> mysql_con -> commit();
+                    $valido= true;
+                } else {
+                    $this -> mysql_con -> rollback();
+                    $valido= false;
+                }
+                $this -> mysql_con -> close();
+                $usuario -> __destruct();
         } catch(Exception $e) {
 
             error_log($e);
+            return false;
         }
         return $valido;
     }
-    public function eliminarUsuario($idusuario)
+    public function delete($usuario)
     {
-        $conexion = new MySqlCon();
         $del_valido;
         try {
             $sqlQuery = 'DELETE FROM `usuarios` WHERE `id_usuario`=?';
-            $sentencia = $conexion -> prepare($sqlQuery);
-            $sentencia -> bind_param("i", $idusuario);
+            $sentencia = $this->mysql_con -> prepare($sqlQuery);
+            $sentencia -> bind_param("i", $usuario->idusuario);
             if ($sentencia -> execute()) {
+                $this->mysql_con->commit();
                 $del_valido = TRUE;
             } else {
+                $this->mysql_con->rollback();
                 $del_valido = FALSE;
             }
-            $conexion -> close();
+            $this->mysql_con -> close();
+            $usuario->__destruct();
         } catch(Exception $e) {
             error_log($e);
+            return false;
         }
         return $del_valido;
     }
 
     function autentificar($correo) {
-        $conexion = new MySqlCon();
         $pass = '';
         try {
             $sqlQuery = 'SELECT `password` FROM `usuarios` WHERE `correo`=?';
-            $sentencia = $conexion -> prepare($sqlQuery);
+            $sentencia = $this->mysql_con -> prepare($sqlQuery);
             $sentencia -> bind_param("s", $correo);
             if ($sentencia -> execute()) {
                 $sentencia -> bind_result($recpass);
                 while ($sentencia -> fetch()) {
                     $pass = $recpass;
                 }
-                $conexion -> close();
+                $this->mysql_con -> close();
             }
         } catch(Exception $e) {
             error_log($e);
@@ -64,11 +78,10 @@ class Usuariosdb {
     }
 
     //validar usuario ingresar en registrar
-    function validarUsuario($correo) {
-        $conexion = new MySqlCon();
+    function exist($usuario) {
         try {
             $sqlQuery = 'SELECT COUNT(*)FROM `usuarios` WHERE UPPER(TRIM(`correo`)) = UPPER(TRIM(?))';
-            $sentencia = $conexion -> prepare($sqlQuery);
+            $sentencia = $this->mysql_con -> prepare($sqlQuery);
             $sentencia -> bind_param("s", $correo);
             if ($sentencia -> execute()) {
                 $sentencia -> bind_result($cantidad);
@@ -80,20 +93,21 @@ class Usuariosdb {
                     }
                 }
             }
-            $conexion -> close();
+            $usuario->__destruct();
+            $this->mysql_con -> close();
         } catch(Exception $e) {
             error_log($e);
+            return false;
         }
         return $verificador;
 
     }
 
     function listarInformacionUsuario($correo) {
-        $conexion = new MySqlCon();
         $objeto = new Usuarios();
         try {
             $sqlQuery = 'SELECT `id_usuario`, `nombre`, `correo`,`password`  FROM `usuarios` WHERE `correo` = ?';
-            $sentencia = $conexion -> prepare($sqlQuery);
+            $sentencia = $this->mysql_con -> prepare($sqlQuery);
             $sentencia -> bind_param("s", $correo);
             if ($sentencia -> execute()) {
                 $sentencia -> bind_result($id_usuario, $nombre, $correo, $contrasena);
@@ -103,7 +117,7 @@ class Usuariosdb {
                     $objeto -> correo = $correo;
                     $objeto -> contrasena = $contrasena;
                 }
-                $conexion -> close();
+                $this->mysql_con -> close();
             }
         } catch(Exception $e) {
             error_log($e);
@@ -111,14 +125,13 @@ class Usuariosdb {
         return $objeto;
     }
 
-    public function listarUsuarios() {
-        $conexion = new MySqlCon();
+    public function selectAll() {
         $arreglo=array();
         $objeto = new Usuarios();
         $indice = 0;
         try {
             $sqlQuery = 'SELECT `ID_USUARIO`, `NOMBRE`, `CORREO`, `PASSWORD` FROM `usuarios`';
-            $sentencia = $conexion -> prepare($sqlQuery);
+            $sentencia = $this->mysql_con -> prepare($sqlQuery);
             if ($sentencia -> execute()) {
                 $sentencia -> bind_result($ID_USUARIO, $nombre, $correo, $password);
                 while ($sentencia -> fetch()) {
@@ -128,34 +141,40 @@ class Usuariosdb {
                     $objeto -> correo = $correo;
                     $objeto -> id_usuario = $ID_USUARIO;
                     $arreglo[$indice] = $objeto;
+                    $objeto->__destruct();
                     $indice++;
                 }
             }
-            $conexion -> close();
+            $this->mysql_con -> close();
         } catch(Exception $e) {
             error_log($e);
         }
         return $arreglo;
     }
 
-    function modificarUsuario($usuario) {
-        $conexion = new MySqlCon();
+    function update($usuario) {
         $reg_valido;
         try {
             $sqlQuery = 'UPDATE `usuarios` SET `nombre`=?,`correo`=?,`password`=? WHERE `id_usuario`=?';
-            $sentencia = $conexion -> prepare($sqlQuery);
+            $sentencia = $this->mysql_con -> prepare($sqlQuery);
             $sentencia -> bind_param("sssi", $usuario->nombre, $usuario->correo, $usuario->contrasena, $usuario->id_usuario);
             if ($sentencia -> execute()) {
+                $this->mysql_con->commit();
                 $reg_valido = TRUE;
             } else {
+                $this->mysql_con->rollback();
                 $reg_valido = FALSE;
             }
-            $conexion -> close();
+            $this->mysql_con -> close();
+            $usuario->__destruct();
         } catch(Exception $e) {
             error_log($e);
+            return false;
         }
         return $reg_valido;
     }
-
+function __destruct() {
+        unset($this);
+    }
 }
 ?>

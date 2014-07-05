@@ -24,15 +24,14 @@
             $usuario = $_SESSION['usuario'];
 			$titulo = 'Mantenedor Vehiculos';
             $vehiculoDAO= new vehiculoDAO();
-			$listaVehiculos = $vehiculoDAO->listarVehiculos();
+			$listaVehiculos = $vehiculoDAO->selectAll();
             if(sizeof($listaVehiculos)>0)
             {
 			for ($i=0; $i < sizeof($listaVehiculos); $i++) {
                 $tablavehiculos.='<tr><td>'.$listaVehiculos[$i]->id_vehiculo.'</td><td>'.$listaVehiculos[$i]->nombre_tipo_vehiculo.'</td><td>'.$listaVehiculos[$i]->fabricante_vehiculo.'</td>
                 <td>'.$listaVehiculos[$i]->modelo_vehiculo.'</td><td>'.$listaVehiculos[$i]->anio_fabricacion.'</td><td>'.$listaVehiculos[$i]->descripcion_vehiculo.'</td>';
-                $tablavehiculos.='<td><form action="controlador/eliminarVehiculo.php" method="post" >
-                <input type="hidden" name="id_usuarioel" id="id_usuarioel" value="'.$listaVehiculos[$i]->id_vehiculo.'" />
-				<input type="submit" name="eliminar"></input></form></tr>';
+                $tablavehiculos.='<td><a href="mantenedorVehiculo.php?del='.$listaVehiculos[$i]->id_vehiculo.'">
+            Eliminar</a></td></tr>';
             }
             }
 		 $titulo_front = '<h2>Bienvenido</h2>
@@ -53,43 +52,49 @@
 					</ul>';
 		
 		$tipo_vehiculoDAO= new tipo_de_vehiculoDAO();	
-		$lista_tipo_vehiculo = $tipo_vehiculoDAO -> listarTipoVehiculos();
+		$lista_tipo_vehiculo = $tipo_vehiculoDAO -> selectAll();
 		
-		$fron_table .='<form class="formulario" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
+		$front_table ='<form class="formulario" action="controlador/mantenedorVehiculo.php" method="post" onsubmit="return validarFormulario()">
 						<ul>
                 			<li>
                     			 <h2>Registrar Vehiculos</h2>
                 			</li>';
         $size_tipo = sizeof($lista_tipo_vehiculo);
+        $listatipos='';
         if ($size_tipo > 0) {
             for ($i = 0; $i < $size_tipo; $i++) {
-                $front_table .= '<option value="' . $lista_tipo_vehiculo[$i] -> id_tipo_vehiculo . '">' . $lista_tipo_vehiculo[$i] -> nombre_tipo_vehiculo . '</option>';
+                $listatipos .= '<option value="' . $lista_tipo_vehiculo[$i] -> id_tipo_vehiculo . '">' . $lista_tipo_vehiculo[$i] -> nombre_tipo_vehiculo . '</option>';
             }
         }	
 			
             $front_table .= '
                 <li>
-                    <select id="editorial" name="editorial" ><option value="none" selected="selected">-- Tipo --</option>
+                    <label for="nombretipo">ID Vehiculo</label>
+                    <input type="text" placeholder="Ingresar uno para actualizar" name="id_vehiculo" id="id_vehiculo" placeholder="4x4" />
+                </li>
+                <li>
+                <label for="nombretipo">Tipo Vehiculo</label>
+                    <select id="id_tipo_vehiculo" name="id_tipo_vehiculo" ><option value="none" selected="selected">-- Tipo --</option>'.$listatipos.'
                     </select>
                 </li>
                 <li>
                     <label for="fabricante">Fabricante</label>
-                    <input type="text" name="fabricante" id="fabricante" placeholder="Toyota" onblur="validarnombre()"  />
+                    <input type="text" name="fabricante_vehiculo" id="fabricante_vehiculo" placeholder="Toyota" onblur="validarnombre()"  />
                     <span id="errnombre" style="color:red"></span>
                 </li>
                 <li>
                     <label for="modelo">Modelo</label>
-                    <input type="text" name="modelo id="modelo" placeholder="L2000" onblur="validarnombre()"  />
+                    <input type="text" name="modelo_vehiculo id="modelo_vehiculo" placeholder="L2000" required  />
                     <span id="errnombre" style="color:red"></span>
                 </li>
                 <li>
-                    <label for="anofabrica">Fabricacion</label>
-                    <input type="text" name="anofabrica" id="anofabrica" placeholder="01-01-2000" onblur="asdsaasd"  />
+                    <label for="anofabrica">Año Fabricacion</label>
+                    <input type="text" name="anio_fabricacion" id="anio_fabricacion" placeholder="01-01-2000" required"  />
                     <span id="errfecha" style="color:red"></span>
                 </li>
                 <li>
                 	<label name="lblingreso">Descripcion</label>
-				    <textarea name="txtmensaje" cols="50" rows="6" id="txtmensaje"> </textarea>
+				    <textarea name="descripcion_vehiculo" cols="50" rows="6" id="descripcion_vehiculo" required>  </textarea>
                 </li>
                  <button class="submit" type="submit" name="submit">Guardar</button>
              </ul>
@@ -97,8 +102,7 @@
 			 
 			 
 			         
-			$front='<form class="formularioactuariza" action="controlador/registro.php" method="post" onsubmit="return validarFormulario()">
-            <table>
+			$front='<table>
             <thead>
                 <tr>
                 <th>ID Vehiculo</th>
@@ -112,8 +116,7 @@
             <tbody>
                '. $tablavehiculos.'
             </tbody>
-            </table>
-            </form>';
+            </table>';
 			
 			
 			
