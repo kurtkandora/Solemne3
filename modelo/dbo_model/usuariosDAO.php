@@ -18,7 +18,8 @@ class Usuariosdb extends DBAbstractModel {
         try {
             $sqlQuery = 'INSERT INTO `usuarios`(`NOMBRE`, `CORREO`, `PASSWORD`) VALUES (?,?,?)';
             $sentencia = $this->mysql_con -> prepare($sqlQuery);
-            $sentencia -> bind_param("sss", $usuario->nombre, $usuario->correo, $usuario->contrasena);
+            $sentencia -> bind_param("sss", $usuario->nombre, $usuario->correo, $usuario->password);
+            $sentencia -> execute();
             if ($this -> mysql_con -> affected_rows) {
                     $this -> mysql_con -> commit();
                     $valido= true;
@@ -41,7 +42,7 @@ class Usuariosdb extends DBAbstractModel {
         try {
             $sqlQuery = 'DELETE FROM `usuarios` WHERE `id_usuario`=?';
             $sentencia = $this->mysql_con -> prepare($sqlQuery);
-            $sentencia -> bind_param("i", $usuario->idusuario);
+            $sentencia -> bind_param("i", $usuario->id_usuario);
             if ($sentencia -> execute()) {
                 $this->mysql_con->commit();
                 $del_valido = TRUE;
@@ -93,7 +94,6 @@ class Usuariosdb extends DBAbstractModel {
                 }
             }
             $usuario->__destruct();
-            $this->mysql_con -> close();
         } catch(Exception $e) {
             error_log($e);
             return false;

@@ -58,7 +58,7 @@
                     <input type="text" placeholder="Ingresar uno para actualizar" name="id_usuario" id="id_usuario" placeholder="4x4" />
                 </li>
                 <li>
-                    <label for="nombre>Nombre</label>
+                    <label for="nombres">Nombre</label>
                     <input type="text" name="nombre" id="nombre" placeholder="Angelo Fecci" onblur="validarnombre()" required />
                     <span id="errnombre" style="color:red"></span>
                 </li>

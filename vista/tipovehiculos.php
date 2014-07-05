@@ -27,7 +27,7 @@
             $listaTipoVehiculos = $TipoVehiculoDAO->selectALL();
 			for ($i=0; $i < sizeof($listaTipoVehiculos); $i++) {
                 $tablatipovehiculos.='<tr><td>'.$listaTipoVehiculos[$i]->id_tipo_vehiculo.'</td><td>'.$listaTipoVehiculos[$i]->nombre_tipo_vehiculo.'</td><td>'.
-                					  $listaTipoVehiculos[$i]->descripcion_tipo_vehiculo.'</td>';
+                					  $listaTipoVehiculos[$i]->descripcion_tipo_Vehiculo.'</td>';
                 $tablatipovehiculos.='<td> <a href="../controlador/mantenedorTipoVehiculo.php?del='.$listaTipoVehiculos[$i]->id_tipo_vehiculo.'">
             Eliminar</a></td> </tr>';
             }
@@ -63,7 +63,7 @@
                 </li>
                <li>
 				<label name="lblingreso">Descripcion</label>
-				<textarea name="txtmensaje" cols="50" rows="6" id="txtmensaje" required> </textarea>
+				<textarea name="descripcion_tipo_Vehiculo" cols="50" rows="6" id="descripcion_tipo_Vehiculo" required> </textarea>
 				</li>
                <li> <button class="submit" type="submit" name="submit">Guardar</button></li>
              </ul>

@@ -3,7 +3,7 @@ require_once '../modelo/dbo_model/vehiculoDAO.php';
 require_once '../modelo/dto_model/vehiculo.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' | $_SERVER['REQUEST_METHOD'] == 'POST') {
-    $vehiculo_model = new Vehiculodb();
+    $vehiculo_model = new vehiculoDAO();
     $vehiculo = new Vehiculo();
 
     switch ($_SERVER['REQUEST_METHOD']) {

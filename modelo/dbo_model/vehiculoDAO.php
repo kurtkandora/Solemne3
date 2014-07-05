@@ -51,7 +51,6 @@ class vehiculoDAO extends DBAbstractModel {
                 }
             }
             $vehiculo->__destruct();
-            $this->mysql_con -> close();
         } catch(Exception $e) {
             error_log($e);
             return false;

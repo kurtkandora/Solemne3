@@ -52,7 +52,6 @@ class Tipo_de_vehiculoDAO extends DBAbstractModel {
                 }
             }
             $tipo_de_vehiculo->__destruct();
-            $this->mysql_con -> close();
         } catch(Exception $e) {
             error_log($e);
            return FALSE;
@@ -91,7 +90,7 @@ class Tipo_de_vehiculoDAO extends DBAbstractModel {
         try {
             $sqlQuery = 'DELETE FROM `tipo_de_vehiculo` WHERE `ID_TIPO_VEHICULO`=?';
             $sentencia = $this->mysql_con -> prepare($sqlQuery);
-            $sentencia -> bind_param("i", $tipo_vehiculo->$id_tipo_vehiculo);
+            $sentencia -> bind_param("i", $tipo_vehiculo->id_tipo_vehiculo);
             if ($sentencia -> execute()) {
                 $this->mysql_con->commit();
                 $del_valido = TRUE;

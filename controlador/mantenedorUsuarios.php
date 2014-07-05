@@ -1,5 +1,4 @@
 <?php
-echo (realpath ('../modelo/dbo_model/usuariosDAO.php'));
 require_once '../modelo/dbo_model/usuariosDAO.php';
 require_once '../modelo/dto_model/usuarios.php';
 require_once './validaciones.php';
@@ -15,16 +14,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' | $_SERVER['REQUEST_METHOD'] == 'POST') 
             if (!empty($_POST['id_usuario'])) {
                 $usuario -> id_usuario = $_POST['id_usuario'];
                 $usuario -> nombre = $_POST['nombre'];
-                $usuario -> apellido = $_POST['password'];
-                $usuario -> email = $_POST['correo'];
-                if ($validaciones -> validarNombre($usuario -> nombre) & $validaciones -> validarCorreo($usuario -> email)) {
+                $usuario -> password = $_POST['password'];
+                $usuario -> correo = $_POST['correo'];
+                if ($validaciones -> validarNombre($usuario -> nombre) & $validaciones -> validarCorreo($usuario -> correo)) {
                     $usuario_model -> update($usuario);
                 }
             } else if (!empty($_POST['nombre'])) {
                 $usuario -> nombre = $_POST['nombre'];
-                $usuario -> apellido = $_POST['password'];
-                $usuario -> email = $_POST['correo'];
-                if ($validaciones -> validarNombre($usuario -> nombre) & $validaciones -> validarCorreo($usuario -> email)) {
+                $usuario -> password = $_POST['password'];
+                $usuario -> correo = $_POST['correo'];
+                if ($validaciones -> validarNombre($usuario -> nombre) & $validaciones -> validarCorreo($usuario -> correo)) {
                     $usuario_model -> insert($usuario);
                 }
             }
@@ -44,6 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' | $_SERVER['REQUEST_METHOD'] == 'POST') 
     $usuario_model -> __destruct();
 
 }
+
 header('Status: 301 Moved Permanently', false, 301);
 header('Location:../vista/usuarios.php');
+
+
+
 ?>
